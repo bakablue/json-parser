@@ -18,7 +18,7 @@
 
 namespace json
 {
-  typedef std::tuple<std::string, JsonValue> Map;
+  typedef std::tuple<std::string, JsonValue> MapValue;
 
   class JsonValue
   {
@@ -26,6 +26,13 @@ namespace json
       virtual void parse(std::istream& stream) = 0;
   };
 
+  class Map
+  {
+    public:
+      void parse(std::istream& stream);
+    private:
+      MapValue value_;
+  }
   class Object : JsonValue // {}
   {
     public:
