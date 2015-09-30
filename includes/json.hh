@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include <boost/variant.hpp>
+#include <iterator>
 
 // {}
 // { [] }
@@ -24,6 +25,8 @@ namespace json
 {
   // Primitive type
   // XXX Note: it can begin by "[]"
+
+  void parse(std::string filename);
 
   class JsonValue
   {  
@@ -47,11 +50,24 @@ namespace json
       enum MapState { KEY, VALUE } state_;
   };
 
+  typedef std::vector<Map>::iterator iterator;
+  typedef std::vector<Map>::const_iterator citerator;
+
   class Object : public JsonValue
   {
     public:
       Object(std::ifstream& stream);
       void print(std::ostream& os) const;
+
+      // Container function
+      // operator[]
+      const Map&                  operator[](size_t pos) const;
+      Map&                        operator[](size_t pos);
+      iterator                    begin();
+      citerator                   begin() const;
+      iterator                    end();
+      citerator                   end() const;
+      //std::shared_prt<JsonValue>& operator[](std::string key);
     private:
       std::vector<Map> elts_;
   };
@@ -82,4 +98,5 @@ namespace json
   };
 
   std::ostream& operator<<(std::ostream& os, const JsonValue& pvalue);
+  std::ostream& operator<<(std::ostream& os, const Map& pvalue);
 };
