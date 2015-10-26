@@ -8,24 +8,15 @@
 #include <boost/variant.hpp>
 #include <iterator>
 
-// {}
-// { [] }
-// { "toto" : "tata" }
-
 // Array, Map, Object
 // String
 // Null
-// Boolean
 // Array
 // Number
 // Object
 
-
 namespace json
 {
-  // Primitive type
-  // XXX Note: it can begin by "[]"
-
   void parse(std::string filename);
 
   class JsonValue
@@ -60,16 +51,15 @@ namespace json
       void print(std::ostream& os) const;
 
       // Container function
-      // operator[]
       const Map&                  operator[](size_t pos) const;
       Map&                        operator[](size_t pos);
       iterator                    begin();
       citerator                   begin() const;
       iterator                    end();
       citerator                   end() const;
-      //std::shared_prt<JsonValue>& operator[](std::string key);
     private:
       std::vector<Map> elts_;
+
   };
 
   class Array : public JsonValue

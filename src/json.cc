@@ -6,7 +6,6 @@ namespace json
 
   Array::Array(std::ifstream& stream)
   {
-    //std::cout << "begin Array" << stream.tellg() << std::endl;
     char c;
     do
     {
@@ -21,7 +20,6 @@ namespace json
       c = stream.get();
 
     } while (c != ']');
-    //std::cout << "end Array" << stream.tellg() << std::endl;
   }
 
   void Array::print(std::ostream& os) const

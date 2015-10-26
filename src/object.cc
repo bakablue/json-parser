@@ -5,7 +5,6 @@ namespace json
 
   Object::Object(std::ifstream& stream)
   {
-    std::cout << "begin Object " << stream.tellg() << std::endl;
     char c;
     do
     {
@@ -13,16 +12,12 @@ namespace json
 
       if (c != ' ' && c != '\n')
       {
-        std::cout << c<< std::endl;
         elts_.push_back(Map(stream));
       }
 
       c = stream.get();
 
     } while (c != '}');
-    print(std::cout);
-    std::cout << std::endl;
-    std::cout << "end Object " << stream.tellg() << std::endl;
   }
 
   void Object::print(std::ostream& os) const
@@ -69,16 +64,4 @@ namespace json
   {
     return elts_.end();
   }
-
-  /*Object& Object::operator=(const Object& other)
-    {
-    }
-    Object& Object::operator=(Object&&      other)
-    {
-    }
-    Object& Object::operator=(std::initializer_list<Map> ilist)
-    {
-    }
-    */
-
 }

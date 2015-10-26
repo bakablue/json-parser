@@ -6,7 +6,6 @@ namespace json
     : key_("")
     , state_(KEY)
   {
-    //std::cout << "begin Map" << stream.tellg() << std::endl;
     do {
       char c = stream.peek();
 
@@ -41,22 +40,17 @@ namespace json
         value_ = std::make_shared<PrimitiveValue>(PrimitiveValue(-1 * i));
       }
       else if (c == '{')
-      {
-        //std::cout << "found object " << stream.tellg() << std::endl;
         value_ = std::make_shared<Object>(Object(stream));
-      }
+
       else if (c == '[')
-      {
-        //std::cout << "found array " << stream.tellg() << std::endl;
         value_ = std::make_shared<Array>(Array(stream));
-      }
 
       else if (c == ':')
         state_ = VALUE;
+
       // object
       // map
     } while (!stream.eof());
-    //std::cout << "end Map"  << stream.tellg()<< std::endl;
   }
 
   void Map::parse_key(std::ifstream& stream)
